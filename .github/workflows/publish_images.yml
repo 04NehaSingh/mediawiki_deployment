@@ -30,4 +30,7 @@ jobs:
           chmod -R 777 $HOME_DIR/mariadb
           cd $HOME_DIR/mariadb
           docker build . --file Dockerfile --tag $USERNAME/$IMAGE_NAME
+          
+      - name: Push maria database image
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/$IMAGE_NAME
 
