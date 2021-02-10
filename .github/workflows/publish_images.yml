@@ -29,5 +29,5 @@ jobs:
           echo $GITHUB_REPOSITORY
           chmod -R 777 $HOME_DIR/mariadb
           cd $HOME_DIR/mariadb
-          ls
+          docker build . --file Dockerfile --tag $USERNAME/$IMAGE_NAME
 
