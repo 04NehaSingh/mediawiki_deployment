@@ -13,4 +13,6 @@ Deploying in cloud should be designed in the form of microservice architecture.
 
 ![](https://github.com/04NehaSingh/mediawiki_deployment/workflows/publish_mariadb_image/badge.svg) 
 
+![](https://github.com/04NehaSingh/mediawiki_deployment/workflows/publish_mediawiki_image/badge.svg) 
+
  
