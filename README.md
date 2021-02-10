@@ -17,13 +17,14 @@ Deploying in cloud should be designed in the form of microservice architecture.
   
   ( Diagram uploaded)
   
-  
-  - Database docker image contians: ![](https://github.com/04NehaSingh/mediawiki_deployment/workflows/publish_mariadb_image/badge.svg) 
+  ![](https://github.com/04NehaSingh/mediawiki_deployment/workflows/publish_mariadb_image/badge.svg) 
+  - Database docker image contians: 
       a. mariadb-server and mysql
       
       Use: docker pull 11nehas/mariadb:latest      
   
-  - mediawiki docker image contians :![](https://github.com/04NehaSingh/mediawiki_deployment/workflows/publish_mediawiki_image/badge.svg) 
+  ![](https://github.com/04NehaSingh/mediawiki_deployment/workflows/publish_mediawiki_image/badge.svg)
+  - mediawiki docker image contians : 
       a. apache 2.4.46 verison
       b. php: 7.3.7 version
       c. mediawiki: 1.33.0 version 
