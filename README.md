@@ -11,6 +11,6 @@ Requirement:
 The installation method on a single server is mentioned in https://www.digitalocean.com/community/tutorials/how-to-install-mediawiki-on-centos-7 
 Deploying in cloud should be designed in the form of microservice architecture.
 
-![](https://github.com/04NehaSingh/mediawiki_deployment/workflows/mariadb_image/badge.svg) 
+![](https://github.com/04NehaSingh/mediawiki_deployment/workflows/publish_mariadb_image/badge.svg) 
 
  
