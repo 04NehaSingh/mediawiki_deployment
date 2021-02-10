@@ -27,6 +27,6 @@ jobs:
           HOME_DIR=$PWD
           echo $HOME_DIR
           echo $GITHUB_REPOSITORY
+          chmod -R 777 $HOME_DIR/mariadb
           ls
-          chmod -R 777 $GITHUB_REPOSITORY/mariadb
 
