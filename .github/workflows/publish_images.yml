@@ -1,0 +1,27 @@
+name: mariadb_image
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  USERNAME: 11nehas
+  IMAGE_NAME: mariadb_wiki
+  
+jobs:
+  mediawiki_image:
+  
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build maria database image
+        run: |
+          HOME_DIR=$PWD
+          chmod -R 777 $HOME_DIR/mariadb
+          docker build . --file Dockerfile --tag $USERNAME/$IMAGE_NAME
+
