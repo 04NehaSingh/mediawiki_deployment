@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mediawiki-app
+  labels:
+    app: mediawiki-app
+spec:
+  selector:
+    matchLabels:
+      app: mediawiki-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mediawiki-app
+        type: web
+    spec:
+      containers:
+        - name: mediawiki-container
+          image: mediawiki
+          ports:
+            - containerPort: 80
+              name: httpd-port
+          env:
+            - name: MYSQL_DB_HOST
+              value: mariadb-service
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: dbuser
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: dbpassword
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: dbname      

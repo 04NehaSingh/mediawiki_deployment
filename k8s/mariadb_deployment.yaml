@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mediawiki-db
+  labels:
+    app: mediawiki-db
+spec:
+  selector:
+    matchLabels:
+      app: mediawiki-db
+      type: database
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mediawiki-db
+        type: database
+    spec:
+      containers:
+        - name: mediawiki-db-container
+          image: mariadb
+          ports:
+            - containerPort: 3306
+              name: db-port
+          env:
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: dbname
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: dbuser
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: dbpassword
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: dbrootpassword
+            - name: MYSQL_RANDOM_ROOT_PASSWORD
+              value: 'yes'
+          volumeMounts:
+          - name: db-persistent-storage
+            mountPath: /var/lib/mysql
+      volumes:
+      - name: db-persistent-storage
+        persistentVolumeClaim:
+          claimName: mariadb-pvc
