@@ -17,7 +17,7 @@ env:
   IMAGE_NAME: mediawiki
   
 jobs:
-  mariadb_image:
+  mediawiki_image:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -28,13 +28,13 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build maria database image
+      - name: Build mediawiki image
         run: |
           HOME_DIR=$PWD
           chmod -R 777 $HOME_DIR/mediawiki
           cd $HOME_DIR/mediawiki
           docker build . --file Dockerfile --tag $USERNAME/$IMAGE_NAME
           
-      - name: Push maria database image
+      - name: Push mediawiki image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/$IMAGE_NAME
 
