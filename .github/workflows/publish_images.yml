@@ -1,4 +1,4 @@
-name: mariadb_image
+name: publish_mariadb_image
 
 on:
   push:
