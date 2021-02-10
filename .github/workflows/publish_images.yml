@@ -3,8 +3,14 @@ name: mariadb_image
 on:
   push:
     branches: [ main ]
+    paths:
+    - 'mariadb/**'
+    - '.github/workflows/**'
   pull_request:
     branches: [ main ]
+    paths:
+    - 'mariadb/**'
+    - '.github/workflows/**'
 
 env:
   USERNAME: 11nehas
