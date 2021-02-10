@@ -1,6 +1,6 @@
 FROM centos:centos7
 
-MAINTAINER Neha Singh <04neha.singh@gmail.com>
+LABEL maintainer=04neha.singh@gmail.com
 
 RUN yum -y install --setopt=tsflags=nodocs epel-release && \ 
     yum -y install --setopt=tsflags=nodocs mariadb-server bind-utils pwgen psmisc hostname && \ 
