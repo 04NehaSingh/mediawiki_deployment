@@ -14,7 +14,7 @@ on:
 
 env:
   USERNAME: 11nehas
-  IMAGE_NAME: mariadb_wiki
+  IMAGE_NAME: mariadb
   
 jobs:
   mariadb_image:
@@ -31,8 +31,6 @@ jobs:
       - name: Build maria database image
         run: |
           HOME_DIR=$PWD
-          echo $HOME_DIR
-          echo $GITHUB_REPOSITORY
           chmod -R 777 $HOME_DIR/mariadb
           cd $HOME_DIR/mariadb
           docker build . --file Dockerfile --tag $USERNAME/$IMAGE_NAME
