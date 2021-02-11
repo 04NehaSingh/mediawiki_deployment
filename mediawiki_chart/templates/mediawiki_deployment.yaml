@@ -1,0 +1,51 @@
+{{- if .Values.mariadb.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.mediawiki.deployment.name }}
+  labels:
+    app: {{ .Values.mediawiki.deployment.name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.mediawiki.deployment.name }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.mediawiki.deployment.name }}
+        type: {{ .Values.mediawiki.deployment.type }}
+    spec:
+      containers:
+        - name: mediawiki-container
+          image: {{ .Values.mediawiki.image }}
+          ports:
+            - containerPort: {{ .Values.mediawiki.port }}
+              name: {{ .Values.mediawiki.port_name }}
+          env:
+            - name: MYSQL_DB_HOST
+            {{- if .Values.mariadb.enabled }}
+              value: mariadb-service
+            {{- end }}
+            - name: MYSQL_USER
+            {{- if .Values.mariadb.enabled }}
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: dbuser
+            {{- end }}
+            - name: MYSQL_PASSWORD
+            {{- if .Values.mariadb.enabled }}
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: dbpassword
+            {{- end }}
+            - name: MYSQL_DATABASE
+            {{- if .Values.mariadb.enabled }}
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: dbname
+            {{- end }}
+{{- end }}

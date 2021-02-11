@@ -1,0 +1,57 @@
+
+
+mediawiki:
+  deployment:
+    name: mediawiki-app
+    type: web
+    replica_count: 1
+
+  service:
+    name: mediawiki-srv
+    type: NodePort
+    port: 30163
+    pod_port: 80
+    target_port: 80
+
+  image: mediawiki
+  port: 80
+  port_name: httpd-port
+
+mariadb:
+  enabled: true
+  image: mariadb
+  name: mediawiki-db-container
+
+  deployment:
+    name: mediawiki-db
+    port: 3306
+    port_name: db-port
+    label_type: database
+
+  service:
+    name: mariadb-service
+    type: ClusterIP
+
+  #TODO: Need to change this ( need to remove credential)
+  cred:
+    dbname: ZGI=
+    dbpassword: cGFzc3dvcmQ=
+    dbrootpassword: cGFzc3dvcmQ=
+    dbuser: d2lraQ==
+  cred_name: mariadb-secret
+  
+persistenceVC:
+  enabled: true
+  name: mariadb-pvc
+  accessMode: ReadWriteOnce
+  size: 8Gi
+  storageclass: manual
+
+persistence:
+  name: physical-volume
+  label_type: local
+  storageClass: manual
+  size: 25Gi
+  host_path: /mnt/data
+  accessMode: ReadWriteOnce
+

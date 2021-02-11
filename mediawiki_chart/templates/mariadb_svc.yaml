@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.mariadb.service.name }}
+  labels:
+    app: {{ .Values.mariadb.deployment.name }}
+spec:
+  type: {{ .Values.mariadb.service.label_type }}
+  ports:
+    - port: {{ .Values.mariadb.deployment.port }}
+      targetPort: {{ .Values.mariadb.deployment.port_name }}
+  selector:
+    app: {{ .Values.mariadb.deployment.name }}
+    type: {{ .Values.mariadb.deployment.label_type }}

@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.mariadb.deployment.name }}
+  labels:
+    app: {{ .Values.mariadb.deployment.name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.mariadb.deployment.name }}
+      type: {{ .Values.mariadb.deployment.label_type }}
+  replicas: {{ .Values.mariadb.deployment.replica_count }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.mariadb.deployment.name }}
+        type: {{ .Values.mariadb.deployment.label_type }}
+    spec:
+      containers:
+        - name: {{ .Values.mariadb.name }}
+          image: {{ .Values.mariadb.image }}
+          ports:
+            - containerPort: {{ .Values.mariadb.deployment.port }}
+              name: {{ .Values.mariadb.deployment.port_name }}
+          env:
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: dbname
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: dbuser
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: dbpassword
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: dbrootpassword
+            - name: MYSQL_RANDOM_ROOT_PASSWORD
+              value: 'yes'
+          volumeMounts:
+          - name: db-persistent-storage
+            mountPath: /var/lib/mysql
+      volumes:
+      - name: db-persistent-storage
+        persistentVolumeClaim:
+          claimName: mariadb-pvc

@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Values.persistence.name }}
+  labels:
+    type: {{ .Values.persistence.label_type }}
+spec:
+  storageClassName: {{ .Values.persistence.storageClass }}
+  capacity:
+    storage: {{ .Values.persistence.size }}
+  accessModes:
+    - {{ .Values.persistence.accessMode }}
+  hostPath:
+    path: {{ .Values.persistence.size | quote }}
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.persistenceVC.name }}
+spec:
+  storageClassName: {{ .Values.persistenceVC.storageclass }}
+  accessModes:
+    - {{ .Values.persistenceVC.accessMode }}
+  resources:
+    requests:
+      storage: {{ .Values.persistenceVC.size }}
