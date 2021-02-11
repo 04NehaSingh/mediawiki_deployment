@@ -64,10 +64,8 @@ jobs:
       
       - name: Perform dry-run
         run: |
-          helm install --dry-run --debug mediawiki  --set mariadb.cred.dbname= ${{ secrets.DBNAME }},mariadb.cred.dbpassword=${{ secrets.DBPASSWORD }},mariadb.cred.dbrootpassword=${{ secrets.DBROOTPASSWORD }},mariadb.cred.dbuser=${{ secrets.DBUSER }} ./mediawiki_chart
-          #helm install --dry-run --debug mediawiki ./mediawiki_chart
+          #helm install --dry-run --debug mediawiki  --set mariadb.cred.dbname= ${{ secrets.DBNAME }},mariadb.cred.dbpassword=${{ secrets.DBPASSWORD }},mariadb.cred.dbrootpassword=${{ secrets.DBROOTPASSWORD }},mariadb.cred.dbuser=${{ secrets.DBUSER }} ./mediawiki_chart
+          helm install --dry-run --debug mediawiki ./mediawiki_chart
       
       - name: Install mediawiki
         run: helm install mediawiki ./mediawiki_chart
-        
-        
