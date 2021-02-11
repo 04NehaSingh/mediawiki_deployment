@@ -5,12 +5,12 @@ on:
    # branches: [ main ]
     paths:
     - 'mariadb/**'
-    - '.github/workflows/**'
+  #  - '.github/workflows/**'
   pull_request:
   #  branches: [ main ]
     paths:
     - 'mariadb/**'
-    - '.github/workflows/**'
+ #   - '.github/workflows/**'
 
 env:
   USERNAME: 11nehas
