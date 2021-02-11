@@ -43,39 +43,42 @@ jobs:
       - name: Get Minikube IP
         env:
           nodeIP: ${ kubectl get nodes -o wide -o=jsonpath='{.items[*].status.addresses[0].address}}
-        run: echo ${{ steps.minikube.outputs.ip }}
-          
-      - name: Get Docker containers
-        run: docker ps
-
-      - name: Install helm
         run: |
-          curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
-          sudo apt-get install apt-transport-https --yes
-          echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
-          sudo apt-get update
-          sudo apt-get install helm    
-      
-      - name: Get helm version
-        run: |
-          helm version
-          helm list
+          echo ${{ steps.minikube.outputs.ip }}
+          echo ${ kubectl get nodes -o wide -o=jsonpath='{.items[*].status.addresses[0].address}}
         
-      - name: Lint helm-chart
-        run: helm lint ./mediawiki_chart
+          
+#       - name: Get Docker containers
+#         run: docker ps
+
+#       - name: Install helm
+#         run: |
+#           curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
+#           sudo apt-get install apt-transport-https --yes
+#           echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+#           sudo apt-get update
+#           sudo apt-get install helm    
       
-      - name: Perform dry-run
-        run: |
-          #helm install --dry-run --debug mediawiki  --set mariadb.cred.dbname= ${{ secrets.DBNAME }},mariadb.cred.dbpassword=${{ secrets.DBPASSWORD }},mariadb.cred.dbrootpassword=${{ secrets.DBROOTPASSWORD }},mariadb.cred.dbuser=${{ secrets.DBUSER }} ./mediawiki_chart
-          helm install --dry-run --debug mediawiki ./mediawiki_chart
+#       - name: Get helm version
+#         run: |
+#           helm version
+#           helm list
+        
+#       - name: Lint helm-chart
+#         run: helm lint ./mediawiki_chart
       
-      - name: Install mediawiki
-        run: |
-          helm install mediawiki ./mediawiki_chart
-          sleep 20
-      - name: Check homepage 
-        run: |
-          echo "${{ env.nodeIP }}"
+#       - name: Perform dry-run
+#         run: |
+#           #helm install --dry-run --debug mediawiki  --set mariadb.cred.dbname= ${{ secrets.DBNAME }},mariadb.cred.dbpassword=${{ secrets.DBPASSWORD }},mariadb.cred.dbrootpassword=${{ secrets.DBROOTPASSWORD }},mariadb.cred.dbuser=${{ secrets.DBUSER }} ./mediawiki_chart
+#           helm install --dry-run --debug mediawiki ./mediawiki_chart
+      
+#       - name: Install mediawiki
+#         run: |
+#           helm install mediawiki ./mediawiki_chart
+#           sleep 20
+#       - name: Check homepage 
+#         run: |
+#           echo "${{ env.nodeIP }}"
         
         
       
