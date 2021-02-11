@@ -2,12 +2,12 @@ name: publish_mariadb_image
 
 on:
   push:
-    branches: [ main ]
+   # branches: [ main ]
     paths:
     - 'mariadb/**'
     - '.github/workflows/**'
   pull_request:
-    branches: [ main ]
+  #  branches: [ main ]
     paths:
     - 'mariadb/**'
     - '.github/workflows/**'
