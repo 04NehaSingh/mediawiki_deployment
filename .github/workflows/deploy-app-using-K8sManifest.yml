@@ -1,4 +1,4 @@
-name: deploy_app
+name: deploy_mediawiki_k8s
 
 on:
   push:
@@ -11,7 +11,7 @@ on:
     - '.github/workflows/**'
       
 jobs:
-  Environment-setup and deployment:  
+  Environment-setup:  
   # sets up kubernet and minikube for running the app
     runs-on: ubuntu-latest
     steps:
@@ -29,11 +29,17 @@ jobs:
         run: kubectl get nodes
       - name: Validate default driver
         run: 'cat $MINIKUBE_HOME/.minikube/machines/minikube/config.json | jq ".DriverName" | grep none'
+        
+  Deployment:
+    needs: Environment-setup
+    runs-on: ubuntu-latest
+    steps:
       - name: deploy mediawiki
         run: |
           echo $PWD
           kubectl apply -f ./k8s
           sleep 30
           kubectl delete -f ./k8s
+          
        
        
