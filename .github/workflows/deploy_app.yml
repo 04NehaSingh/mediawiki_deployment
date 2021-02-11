@@ -11,7 +11,7 @@ on:
     - '.github/workflows/**'
       
 jobs:
-  environment-setup:  
+  Environment-setup and deployment:  
   # sets up kubernet and minikube for running the app
     runs-on: ubuntu-latest
     steps:
