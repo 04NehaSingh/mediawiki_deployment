@@ -11,7 +11,8 @@ on:
     - '.github/workflows/**'
       
 jobs:
-  Environment-setup:  
+  deployment:  
+    name: Start K8s cluster and deploy app
   # sets up kubernet and minikube for running the app
     runs-on: ubuntu-latest
     steps:
