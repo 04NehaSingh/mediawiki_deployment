@@ -44,8 +44,8 @@ jobs:
         run: |
           echo ${{ steps.minikube.outputs.ip }}
           kubectl get pods -o wide
-          kubectl get nodes -o wide -o=jsonpath='{.items[*].status.addresses[0].address
-          nodeIP = $(kubectl get nodes -o wide -o=jsonpath='{.items[*].status.addresses[0].address})
+          kubectl get nodes -o wide -o=jsonpath='{.items[*].status.addresses[0].address}'
+          nodeIP = $(kubectl get nodes -o wide -o=jsonpath='{.items[*].status.addresses[0].address}')
           echo $nodeIP
         
           
