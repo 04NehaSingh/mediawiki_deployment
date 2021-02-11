@@ -29,3 +29,9 @@ jobs:
         run: kubectl get nodes
       - name: Validate default driver
         run: 'cat $MINIKUBE_HOME/.minikube/machines/minikube/config.json | jq ".DriverName" | grep none'
+      - name: deploy mediawiki
+        run: |
+          echo $PWD
+          ls
+       
+       
