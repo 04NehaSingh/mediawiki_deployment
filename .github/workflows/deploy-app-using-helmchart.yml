@@ -63,7 +63,12 @@ jobs:
         run: helm lint ./mediawiki_chart
       
       - name: Perform dry-run
-        run: helm install --dry-run --debug mediawiki ./mediawiki_chart
+        run: |
+          echo -n ${{ secrets.DBNAME }} | base64
+          echo -n ${{ secrets.DBPASSWORD }} | base64
+          echo -n ${{ secrets.DBROOTPASSWORD }} | base64
+          echo -n ${{ secrets.DBUSER }} | base64
+          helm install --dry-run --debug mediawiki ./mediawiki_chart
       
       - name: Install mediawiki
         run: helm install mediawiki ./mediawiki_chart
