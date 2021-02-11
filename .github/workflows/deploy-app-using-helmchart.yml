@@ -75,7 +75,7 @@ jobs:
           sleep 20
       - name: Check homepage 
         run: |
-          echo ${nodeIP}
+          echo "${{ env.nodeIP }}"
         
         
       
