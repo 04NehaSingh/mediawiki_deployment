@@ -32,6 +32,8 @@ jobs:
       - name: deploy mediawiki
         run: |
           echo $PWD
-          ls
+          kubectl apply -f ./k8s
+          sleep 30
+          kubectl delete -f ./k8s
        
        
