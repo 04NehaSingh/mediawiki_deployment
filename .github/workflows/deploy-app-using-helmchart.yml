@@ -1,4 +1,4 @@
-name: deploy_mediawiki_helmchart
+name: deploy_mediawiki_k8s
 
 on:
   push:
@@ -11,19 +11,33 @@ on:
     - '.github/workflows/**'
       
 jobs:
-  Environment-setup and Deploy mediawiki:  
-  # sets up kubernet,minikube and helmchart for running the app
-    runs-on: ubuntu-latest
+  start:
+    name: Start K8s cluster
+    runs-on: ubuntu-20.04
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: Setup Minikube
-        uses: manusa/actions-setup-minikube@v2.3.0
+      - name: Start Minikube
+        id: minikube
+        uses: hiberbee/github-action-minikube@latest
         with:
-          minikube version: 'v1.16.0'
-          kubernetes version: 'v1.19.2'
-          github token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Validate Minikube
-        run: minikube status | grep Running
-      - name: Validate Cluster
-        run: kubectl get nodes
+          profile: github
+
+      - name: Get Minikube status
+        run: minikube status
+
+      - name: Get cluster info
+        run: kubectl cluster-info
+
+      - name: Get Kubernetes pods
+        run: kubectl get services --all-namespaces
+
+      - name: Get Minikube IP
+        run: echo ${{ steps.minikube.outputs.ip }}
+
+      - name: Get Docker containers
+        run: docker ps
+
+      - name: Get Helm releases
+        uses: hiberbee/github-action-helm@latest
+        with:
+          helm-command: list
+       
