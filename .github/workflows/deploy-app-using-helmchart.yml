@@ -33,9 +33,3 @@ jobs:
         uses: hiberbee/github-action-helm@latest
         with:
           helm-command: list
-      - name: deploy mediawiki
-        run: |
-          echo $PWD
-          kubectl apply -f ./k8s
-          sleep 30
-          kubectl delete -f ./k8s
