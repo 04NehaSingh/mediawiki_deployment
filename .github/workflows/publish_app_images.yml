@@ -5,12 +5,12 @@ on:
   #  branches: [ main ]
     paths:
     - 'mediawiki/**'
-    - '.github/workflows/**'
+ #   - '.github/workflows/**'
   pull_request:
    # branches: [ main ]
     paths:
     - 'mediawiki/**'
-    - '.github/workflows/**'
+  #  - '.github/workflows/**'
 
 env:
   USERNAME: 11nehas
