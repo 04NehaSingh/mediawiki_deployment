@@ -4,16 +4,16 @@ on:
   push:
     paths:
     - 'k8s/**'
-    - '.github/workflows/**'
+    # - '.github/workflows/**'
   pull_request:
     paths:
     - 'k8s/**'
-    - '.github/workflows/**'
+    # - '.github/workflows/**'
       
 jobs:
   deployment:  
     name: Start K8s cluster and deploy app
-  # sets up kubernet and minikube for running the app
+    # sets up kubernet and minikube for running the app
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
