@@ -41,11 +41,12 @@ jobs:
         run: kubectl get services --all-namespaces
 
       - name: Get Minikube IP
-#         env:
-#           nodeIP: ${ kubectl get nodes -o wide -o=jsonpath='{.items[*].status.addresses[0].address}}
         run: |
           echo ${{ steps.minikube.outputs.ip }}
-          echo $(kubectl get nodes -o wide -o=jsonpath='{.items[*].status.addresses[0].address})
+          kubectl get pods -o wide
+          kubectl get nodes -o wide -o=jsonpath='{.items[*].status.addresses[0].address
+          nodeIP = $(kubectl get nodes -o wide -o=jsonpath='{.items[*].status.addresses[0].address})
+          echo $nodeIP
         
           
 #       - name: Get Docker containers
