@@ -44,7 +44,8 @@ jobs:
         run: |
           echo ${{ steps.minikube.outputs.ip }}
           kubectl get nodes -o wide -o=jsonpath='{.items[*].status.addresses[0].address}'
-          
+          minikube addons list
+      
       - name: Get Docker containers
         run: docker ps
 
