@@ -2,12 +2,12 @@ name: publish_mediawiki_image
 
 on:
   push:
-    branches: [ main ]
+  #  branches: [ main ]
     paths:
     - 'mediawiki/**'
     - '.github/workflows/**'
   pull_request:
-    branches: [ main ]
+   # branches: [ main ]
     paths:
     - 'mediawiki/**'
     - '.github/workflows/**'
