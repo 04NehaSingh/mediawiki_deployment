@@ -1,7 +1,8 @@
 ----------------------------------------------------------------------------------------------------------------------------------------
                                           # Mediawki_deployment
 -----------------------------------------------------------------------------------------------------------------------------------------
-                            
+![](images/mediawiki.PNG)                                            
+
 Requirement:
 1. Database: In this we used mariadb
 2. Apache: This is used for Running the Mediawiki server 
@@ -30,6 +31,19 @@ Design
 
       Use: docker pull 11nehas/mediawiki:latest 
 
+Deployment
+----------
+ ![](images/Mediawiki%20SVC.jpg) 
+ 
+ Deployment status: 
+ ![](https://github.com/04NehaSingh/mediawiki_deployment/workflows/deploy_mediawiki_k8s/badge.svg) 
+ ![](https://github.com/04NehaSingh/mediawiki_deployment/workflows/deploy_mediawiki_helmChart/badge.svg)
+ 
+
+CI/CD and workflow
+------------------
+ ![](images/ci_cd.PNG) 
+ 
 This repository contains:
 --------------------------- 
   1. Mediawiki docker image
@@ -37,7 +51,9 @@ This repository contains:
   3. K8s manifest file for deployment
   4. Deployment Helm charts
   5. Images
-  
+
+
+
 Deployment using K8s manifest:
 ------------------------------
     Kubectl apply -k ./k8s
@@ -52,6 +68,6 @@ Deployment using helm:
  
 How to access the service:
 --------------------------
-        access use: http://<service fqdn>:30163/
+        access using: http://<service fqdn>:30163/
     
     ex: http://<service_name>.<namespace>.svc.cluster.local:30163
