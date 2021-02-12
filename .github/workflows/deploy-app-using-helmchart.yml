@@ -1,4 +1,4 @@
-name: deploy_mediawiki_k8s
+name: deploy_mediawiki_helmChart
 
 on:
   push:
@@ -40,11 +40,11 @@ jobs:
       - name: Get Kubernetes pods
         run: kubectl get services --all-namespaces
 
-      - name: Get Minikube IP
+      - name: Get Minikube IP and enable addons
         run: |
           echo ${{ steps.minikube.outputs.ip }}
           kubectl get nodes -o wide -o=jsonpath='{.items[*].status.addresses[0].address}'
-          minikube addons list
+          minikube addons enable metrics-server
       
       - name: Get Docker containers
         run: docker ps
@@ -74,7 +74,9 @@ jobs:
           helm install mediawiki --set mariadb.cred.dbname="${{ secrets.DBNAME }}",mariadb.cred.dbpassword="${{ secrets.DBPASSWORD }}",mariadb.cred.dbrootpassword="${{ secrets.DBROOTPASSWORD }}",mariadb.cred.dbuser="${{ secrets.DBUSER }}" ./mediawiki_chart
           sleep 20
           
-      - name: Check homepage 
-        run: echo "wiki Home page"
+      - name: Check deployment 
+        run: |
+          kubectl get all
+          kubectl get hpa
         
       
