@@ -32,12 +32,11 @@ mariadb:
     name: mariadb-service
     type: ClusterIP
 
-  #TODO: Need to change this ( need to remove credential)
   cred:
-    dbname: ZGI=
-    dbpassword: cGFzc3dvcmQ=
-    dbrootpassword: cGFzc3dvcmQ=
-    dbuser: d2lraQ==
+    dbname: ''
+    dbpassword: ''
+    dbrootpassword: ''
+    dbuser: ''
   cred_name: mariadb-secret
   
 persistenceVC:
@@ -54,4 +53,20 @@ persistence:
   size: 25Gi
   host_path: /mnt/data
   accessMode: ReadWriteOnce
+
+hpa:
+  name: mediawiki-hpa
+  deploy_name: mediawiki-app
+  min: 1
+  max: 10
+  tagetCPU_util: 50
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 256Mi
+  limits:
+    cpu: 100m
+    memory: 512Mi
+  
 

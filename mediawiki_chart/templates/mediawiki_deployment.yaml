@@ -49,3 +49,6 @@ spec:
                   key: dbname
             {{- end }}
 {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12}}
+          imagePullPolicy: "Always"

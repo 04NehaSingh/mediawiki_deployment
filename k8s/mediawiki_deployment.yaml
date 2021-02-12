@@ -39,6 +39,7 @@ spec:
                 secretKeyRef:
                   name: mariadb-secret
                   key: dbname  
+          imagePullPolicy: "Always"
           resources:
             requests:
               cpu: 50m
