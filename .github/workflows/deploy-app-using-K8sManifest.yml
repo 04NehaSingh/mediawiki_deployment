@@ -40,6 +40,7 @@ jobs:
           echo $PWD
           kubectl apply -f ./k8s
           sleep 30
+          kubectl get all
           kubectl delete -f ./k8s
           
        
