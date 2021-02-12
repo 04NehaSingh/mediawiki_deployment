@@ -76,6 +76,7 @@ jobs:
           
       - name: Check deployment 
         run: |
+          sleep 30
           kubectl get all
           kubectl get hpa
         
